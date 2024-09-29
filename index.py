@@ -1,7 +1,7 @@
-# from youtube_transcript_api import YouTubeTranscriptApi
-# from youtube_transcript_api.formatters import JSONFormatter
+from youtube_transcript_api import YouTubeTranscriptApi
+from youtube_transcript_api.formatters import JSONFormatter
 from flask import Flask, jsonify
-# import json
+import json
 
 # para rodar o flask -> flask --app index.py run
 # para subir para o vercel -> vercel --prod
@@ -16,22 +16,22 @@ def index():
     }
     return jsonify(data)
 
-# @app.route("/transcript")
-# def result():
-#     transcript = YouTubeTranscriptApi.get_transcripts(["TPXr2fkz0EM"], languages=["pt"])
-#     texto = ""
+@app.route("/transcript")
+def result():
+    transcript = YouTubeTranscriptApi.get_transcripts(["TPXr2fkz0EM"], languages=["pt"])
+    texto = ""
 
-#     formatter = JSONFormatter()
-#     json_formatted = formatter.format_transcript(transcript)
-#     data = json.loads(json_formatted)
+    formatter = JSONFormatter()
+    json_formatted = formatter.format_transcript(transcript)
+    data = json.loads(json_formatted)
 
-#     data_list = data[0]
+    data_list = data[0]
 
-#     texts = [item['text'] for item in data_list['TPXr2fkz0EM'] if 'text' in item]
+    texts = [item['text'] for item in data_list['TPXr2fkz0EM'] if 'text' in item]
 
-#     for text in texts:
-#         texto += text + " "
-#     data = {
-#         'Transcript': texto
-#     }
-#     return jsonify(data)
+    for text in texts:
+        texto += text + " "
+    data = {
+        'Transcript': texto
+    }
+    return jsonify(data)
