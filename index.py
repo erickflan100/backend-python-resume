@@ -8,6 +8,7 @@ import json
 # para criar o requirements -> pip freeze > requirements.txt
 
 app = Flask(__name__)
+aplication = app
 
 @app.route("/")
 def index():
