@@ -3,6 +3,10 @@ from youtube_transcript_api.formatters import JSONFormatter
 from flask import Flask, jsonify
 import json
 
+# para rodar o flask -> flask --app index.py run
+# para subir para o vercel -> vercel --prod
+# para criar o requirements -> pip freeze > requirements.txt
+
 app = Flask(__name__)
 
 @app.route("/")
