@@ -25,6 +25,7 @@ def result():
     video_id = video_url.split("v=")[1]
     user_agent = data.get('userAgent')
     accept = data.get('accept')
+    Connection = data.get('Connection')
     texto = ""
     try:
         # transcript = YouTubeTranscriptApi.get_transcripts([video_id], languages=["pt"])
@@ -35,6 +36,7 @@ def result():
             'Accept-Language': 'pt-BR',
             'Content-Type': 'application/json',
             'Accept': accept,
+            'Connection': Connection,
             'User-Agent': user_agent
         }
         
