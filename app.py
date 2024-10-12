@@ -1,7 +1,7 @@
-from youtube_transcript_api import YouTubeTranscriptApi
-from youtube_transcript_api.formatters import JSONFormatter
+# from youtube_transcript_api import YouTubeTranscriptApi
+# from youtube_transcript_api.formatters import JSONFormatter
 from flask import Flask, jsonify, request
-import json
+# import json
 import requests
 
 # para rodar o flask -> flask --app index.py run
