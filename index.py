@@ -32,7 +32,7 @@ def result():
         headers = {
             'Accept-Language': 'pt-BR',
             'Content-Type': 'application/json',
-            # 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'
+            'User-Agent': 'Chrome/91.0.4472.124 Safari/537.36 Edg/91.0.864.59'
         }
         
         # Construa a URL do vídeo
@@ -46,27 +46,27 @@ def result():
             video_page_body = response.text
             splittedHTML = video_page_body.split('"captions":')
 
-            # if len(splittedHTML) <= 1:
-            #     if not 'class="g-recaptcha"' in splittedHTML:
-            #         data = {
-            #             'Mensagem': 'Erro transcription nao encontrado',
-            #         }
-            #         return jsonify(data), 500
-            #     data = {
-            #         'Mensagem': 'Erro videoId invalido'
-            #     }
-            #     return jsonify(data), 500
+            if len(splittedHTML) < 1:
+                if not 'class="g-recaptcha"' in splittedHTML:
+                    data = {
+                        'Mensagem': 'Erro transcription nao encontrado',
+                    }
+                    return jsonify(data), 500
+                data = {
+                    'Mensagem': 'Erro videoId invalido'
+                }
+                return jsonify(data), 500
             
-            # try:
-            #     caption = json.loads(splittedHTML[1].split(',"videoDetails')[0].replace('\n', ''))
-            # except json.JSONDecodeError:
-            #     return jsonify({'Mensagem': 'Erro ao processar o JSON'}), 500
+            try:
+                caption = json.loads(splittedHTML[1].split(',"videoDetails')[0].replace('\n', ''))
+            except json.JSONDecodeError:
+                return jsonify({'Mensagem': 'Erro ao processar o JSON'}), 500
 
-            # if 'captionTracks' not in caption['playerCaptionsTracklistRenderer']:
-            #     data = {
-            #         'Mensagem': 'Erro captionTracks nao encontrado'
-            #     }
-            #     return jsonify(data), 500
+            if 'captionTracks' not in caption['playerCaptionsTracklistRenderer']:
+                data = {
+                    'Mensagem': 'Erro captionTracks nao encontrado'
+                }
+                return jsonify(data), 500
             
             # caption = caption['playerCaptionsTracklistRenderer']['captionTracks'][0]['baseUrl']
 
