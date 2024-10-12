@@ -12,7 +12,7 @@ app = Flask(__name__)
 aplication = app
 
 @app.route("/")
-def index():
+def index(): 
     data = {
         'Mensagem': 'Resume está Ativo'
     }
