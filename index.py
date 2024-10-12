@@ -90,12 +90,13 @@ def result():
                 # }
                 # return jsonify(data), 500
             data = {
-                'Transcript': splittedHTML
+                'Transcript': splittedHTML,
+                'status_code': len(splittedHTML)
             }
             return jsonify(data)
         else:
             data = {
-            'Mensagem': 'Erro ao buscar o transcript'
+                'Mensagem': 'Erro ao buscar o transcript'
             }
             return jsonify(data), 500
     except:
