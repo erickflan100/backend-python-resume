@@ -57,7 +57,7 @@ def result():
             if len(splittedHTML) < 1:
                 if not 'class="g-recaptcha"' in splittedHTML:
                     data = {
-                        'Mensagem': 'Erro transcription nao encontrado',
+                        'Mensagem': 'Erro transcription nao encontrado'
                     }
                     return jsonify(data), 500
                 data = {
@@ -65,16 +65,16 @@ def result():
                 }
                 return jsonify(data), 500
             
-            try:
-                caption = json.loads(splittedHTML[1].split(',"videoDetails')[0].replace('\n', ''))
-            except json.JSONDecodeError:
-                return jsonify({'Mensagem': 'Erro ao processar o JSON'}), 500
+            # try:
+            #     caption = json.loads(splittedHTML[1].split(',"videoDetails')[0].replace('\n', ''))
+            # except json.JSONDecodeError:
+            #     return jsonify({'Mensagem': 'Erro ao processar o JSON'}), 500
 
-            if 'captionTracks' not in caption['playerCaptionsTracklistRenderer']:
-                data = {
-                    'Mensagem': 'Erro captionTracks nao encontrado'
-                }
-                return jsonify(data), 500
+            # if 'captionTracks' not in caption['playerCaptionsTracklistRenderer']:
+            #     data = {
+            #         'Mensagem': 'Erro captionTracks nao encontrado'
+            #     }
+            #     return jsonify(data), 500
             
             # caption = caption['playerCaptionsTracklistRenderer']['captionTracks'][0]['baseUrl']
 
