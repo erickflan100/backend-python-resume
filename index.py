@@ -46,49 +46,53 @@ def result():
             video_page_body = response.text
             splittedHTML = video_page_body.split('"captions":')
 
-            if len(splittedHTML) <= 1:
-                if not 'class="g-recaptcha"' in splittedHTML:
-                    data = {
-                        'Mensagem': 'Erro transcription nao encontrado',
-                    }
-                    return jsonify(data), 500
-                data = {
-                    'Mensagem': 'Erro videoId invalido'
-                }
-                return jsonify(data), 500
+            # if len(splittedHTML) <= 1:
+            #     if not 'class="g-recaptcha"' in splittedHTML:
+            #         data = {
+            #             'Mensagem': 'Erro transcription nao encontrado',
+            #         }
+            #         return jsonify(data), 500
+            #     data = {
+            #         'Mensagem': 'Erro videoId invalido'
+            #     }
+            #     return jsonify(data), 500
             
-            try:
-                caption = json.loads(splittedHTML[1].split(',"videoDetails')[0].replace('\n', ''))
-            except json.JSONDecodeError:
-                return jsonify({'Mensagem': 'Erro ao processar o JSON'}), 500
+            # try:
+            #     caption = json.loads(splittedHTML[1].split(',"videoDetails')[0].replace('\n', ''))
+            # except json.JSONDecodeError:
+            #     return jsonify({'Mensagem': 'Erro ao processar o JSON'}), 500
 
-            if 'captionTracks' not in caption['playerCaptionsTracklistRenderer']:
-                data = {
-                    'Mensagem': 'Erro captionTracks nao encontrado'
-                }
-                return jsonify(data), 500
+            # if 'captionTracks' not in caption['playerCaptionsTracklistRenderer']:
+            #     data = {
+            #         'Mensagem': 'Erro captionTracks nao encontrado'
+            #     }
+            #     return jsonify(data), 500
             
-            caption = caption['playerCaptionsTracklistRenderer']['captionTracks'][0]['baseUrl']
+            # caption = caption['playerCaptionsTracklistRenderer']['captionTracks'][0]['baseUrl']
 
-            response_captions = requests.get(caption, headers=headers)
-            if response_captions.status_code == 200:
-                # Retorna o conteúdo HTML da página
-                transcript = response_captions.text
-                # for text in transcript:
-                #     texto += {
-                #         'text': text[3],
-                #         'duration': text[2],
-                #         'offset': text[1]
-                #     }
-                data = {
-                    'Transcript': transcript
-                }
-                return jsonify(data)
-            else:
-                data = {
-                    'Mensagem': 'Erro ao buscar o transcript'
-                }
-                return jsonify(data), 500
+            # response_captions = requests.get(caption, headers=headers)
+            # if response_captions.status_code == 200:
+            #     # Retorna o conteúdo HTML da página
+            #     transcript = response_captions.text
+            #     # for text in transcript:
+            #     #     texto += {
+            #     #         'text': text[3],
+            #     #         'duration': text[2],
+            #     #         'offset': text[1]
+            #     #     }
+            #     data = {
+            #         'Transcript': transcript
+            #     }
+            #     return jsonify(data)
+            # else:
+                # data = {
+                #     'Mensagem': 'Erro ao buscar o transcript'
+                # }
+                # return jsonify(data), 500
+            data = {
+                'Transcript': splittedHTML
+            }
+            return jsonify(data)
         else:
             data = {
             'Mensagem': 'Erro ao buscar o transcript'
