@@ -23,6 +23,7 @@ def result():
     data = request.get_json()
     video_url = data.get('url')
     video_id = video_url.split("v=")[1]
+    user_agent = data.get('userAgent')
     texto = ""
     try:
         # transcript = YouTubeTranscriptApi.get_transcripts([video_id], languages=["pt"])
@@ -32,7 +33,7 @@ def result():
         headers = {
             'Accept-Language': 'pt-BR',
             'Content-Type': 'application/json',
-            'User-Agent': 'Chrome/91.0.4472.124 Safari/537.36 Edg/91.0.864.59'
+            'User-Agent': user_agent
         }
         
         # Construa a URL do vídeo
