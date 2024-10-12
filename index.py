@@ -1,6 +1,7 @@
 # from youtube_transcript_api import YouTubeTranscriptApi
 # from youtube_transcript_api.formatters import JSONFormatter
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 import json
 import requests
 
@@ -9,6 +10,8 @@ import requests
 # para criar o requirements -> pip freeze > requirements.txt
 
 app = Flask(__name__)
+# Habilita o CORS para todas as rotas
+CORS(app, resources={r"/*": {"origins": "*"}})  # Permite todas as origens, ajuste conforme necessário
 aplication = app
 
 @app.route("/")
